@@ -8,12 +8,11 @@ import Booking from "./pages/booking.jsx";
 import Footer from "./components/footer";
 
 import Settings from "./main_pages/settings.jsx";
-import { ThemeProvider } from "./components/ThemeContext.jsx";
+
 function App() {
- 
+  
   return (
     <>
-   <ThemeProvider>
       <Navbar />
       <Home />
       <About />
@@ -23,7 +22,6 @@ function App() {
       <Booking />
       <Settings />
       <Footer />
-      </ThemeProvider>
     </>
   );
 }

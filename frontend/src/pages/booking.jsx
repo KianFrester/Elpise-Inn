@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import Navbar from "../components/navbar.jsx";
 import Footer from "../components/footer.jsx";
 const Booking = () => {
-  const { login, register } = useKindeAuth();
+  const navigate = useNavigate();
   return (
     <>
       <Navbar />
@@ -35,14 +34,14 @@ const Booking = () => {
           <br />
           <div className="flex justify-center gap-4">
             <button
-              onClick={() => login()}
+              onClick={() => navigate("/login")}
               className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-md
                     transition duration-300 transform hover:scale-105 hover:shadow-lg"
             >
               Login
             </button>
             <button
-              onClick={() => register()}
+              onClick={() => navigate("/signup")}
               className="bg-teal-600 hover:bg-teal-700 text-white font-medium px-6 py-3 rounded-md
                     transition duration-300 transform hover:scale-105 hover:shadow-lg"
             >

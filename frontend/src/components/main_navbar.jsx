@@ -1,29 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
+import { supabase } from "/supabaseClient";
 
 // Separate Link Component
 const NavLink = ({ path, label, isActive, onClick }) => (
   <Link
     to={path}
     onClick={onClick}
-    className={`text-white font-medium text-[1.05rem] tracking-wide transition-colors relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-teal-600 after:left-0 after:-bottom-1.5 after:transition-all after:duration-300 hover:after:w-full ${isActive ? 'text-teal-600 after:w-full' : 'hover:text-teal-600'}`}
+    className={`text-white font-medium text-[1.05rem] tracking-wide transition-colors relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-teal-600 after:left-0 after:-bottom-1.5 after:transition-all after:duration-300 hover:after:w-full ${
+      isActive ? "text-teal-600 after:w-full" : "hover:text-teal-600"
+    }`}
   >
     {label}
   </Link>
 );
 
 const MainNavbar = () => {
-  const { logout, isAuthenticated } = useKindeAuth();
-  const navigate = useNavigate();
   const location = useLocation();
-
-  useEffect(() => {
-    if (!isAuthenticated) {
-      navigate("/");
-    }
-  }, [isAuthenticated, navigate]);
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -35,11 +29,9 @@ const MainNavbar = () => {
     setSidebarOpen(false);
   };
 
-  const { user } = useKindeAuth();
-  useEffect(() => {
-    console.log(user);
-  }, []);
-
+  const signOut = async () => {
+    const { error } = await supabase.auth.signOut();
+  };
   const isActive = (path) => location.pathname === path;
 
   const routes = [
@@ -106,7 +98,7 @@ const MainNavbar = () => {
               <span className="sr-only">Open user menu</span>
               <img
                 alt=""
-                src={user?.picture}
+                src={"user?.image"}
                 className="size-10 rounded-full"
               />
             </MenuButton>
@@ -135,7 +127,7 @@ const MainNavbar = () => {
               <button
                 onClick={(e) => {
                   e.preventDefault();
-                  logout();
+                  signOut();
                 }}
                 className="block w-full text-left px-4 py-2 text-sm text-red-500 data-focus:bg-gray-100 data-focus:outline-hidden hover:bg-gray-100"
               >
@@ -218,7 +210,7 @@ const MainNavbar = () => {
 
           <button
             className="w-full px-5 py-2.5 rounded border border-red-600 text-red-600 font-medium text-[0.95rem] tracking-wide transition-all duration-300 hover:bg-red-600 hover:text-white"
-            onClick={logout}
+            onClick={signOut}
           >
             Logout
           </button>

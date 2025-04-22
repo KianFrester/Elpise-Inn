@@ -29,6 +29,7 @@ const RouterPage = () => {
         <Route path="/contact" element={<Contact />}></Route>
         <Route path="/booking" element={<Booking />}></Route>
         <Route path="/*" element={<NotFound />}></Route>
+
         {/* logged in pages */}
         <Route path="/home_page" element={<HomePage />}></Route>
         <Route path="/about_page" element={<AboutPage />}></Route>

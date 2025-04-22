@@ -1,28 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom"; 
-import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
-
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 const NavLink = ({ path, label, isActive, onClick }) => (
   <Link
     to={path}
     onClick={onClick}
-    className={`text-white font-medium text-[1.05rem] tracking-wide transition-colors relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-teal-600 after:left-0 after:-bottom-1.5 after:transition-all after:duration-300 hover:after:w-full ${isActive ? 'text-teal-600 after:w-full' : 'hover:text-teal-600'}`}
+    className={`text-white font-medium text-[1.05rem] tracking-wide transition-colors relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-teal-600 after:left-0 after:-bottom-1.5 after:transition-all after:duration-300 hover:after:w-full ${
+      isActive ? "text-teal-600 after:w-full" : "hover:text-teal-600"
+    }`}
   >
     {label}
   </Link>
 );
 
 const Navbar = () => {
-  const { login, register, isAuthenticated } = useKindeAuth();
   const navigate = useNavigate();
-  const location = useLocation(); 
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate("/home_page");
-    }
-  }, [isAuthenticated, navigate]);
+  const location = useLocation();
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -53,9 +46,24 @@ const Navbar = () => {
           className="flex items-center cursor-pointer hover:opacity-90 transition-opacity"
         >
           <div className="w-10 h-10 mr-3">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-              <path d="M12 2L3 7V17L12 22L21 17V7L12 2Z" fill="#4f9a94" stroke="#2d5753" strokeWidth="1.5" />
-              <path d="M12 6L7 9V15L12 18L17 15V9L12 6Z" fill="white" stroke="#4f9a94" strokeWidth="1" />
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-full h-full"
+            >
+              <path
+                d="M12 2L3 7V17L12 22L21 17V7L12 2Z"
+                fill="#4f9a94"
+                stroke="#2d5753"
+                strokeWidth="1.5"
+              />
+              <path
+                d="M12 6L7 9V15L12 18L17 15V9L12 6Z"
+                fill="white"
+                stroke="#4f9a94"
+                strokeWidth="1"
+              />
             </svg>
           </div>
           <h1 className="text-2xl font-bold text-teal-600 tracking-wide font-playfair">
@@ -81,13 +89,13 @@ const Navbar = () => {
 
           <div className="flex gap-4 ml-8">
             <button
-              onClick={login}
+              onClick={() => navigate('/login')}
               className="px-5 py-2.5 rounded border border-teal-600 text-teal-600 font-medium text-[0.95rem] tracking-wide transition-all duration-300 hover:bg-teal-600 hover:text-white"
             >
               Sign In
             </button>
             <button
-              onClick={register}
+              onClick={() => navigate('/signup')}
               className="px-5 py-2.5 rounded bg-teal-700 border border-teal-700 text-white font-medium text-[0.95rem] tracking-wide transition-all duration-300 hover:bg-teal-700"
             >
               Register
@@ -109,9 +117,24 @@ const Navbar = () => {
               onClick={closeSidebar}
             >
               <div className="w-10 h-10">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-                  <path d="M12 2L3 7V17L12 22L21 17V7L12 2Z" fill="#4f9a94" stroke="#2d5753" strokeWidth="1.5" />
-                  <path d="M12 6L7 9V15L12 18L17 15V9L12 6Z" fill="white" stroke="#4f9a94" strokeWidth="1" />
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-full h-full"
+                >
+                  <path
+                    d="M12 2L3 7V17L12 22L21 17V7L12 2Z"
+                    fill="#4f9a94"
+                    stroke="#2d5753"
+                    strokeWidth="1.5"
+                  />
+                  <path
+                    d="M12 6L7 9V15L12 18L17 15V9L12 6Z"
+                    fill="white"
+                    stroke="#4f9a94"
+                    strokeWidth="1"
+                  />
                 </svg>
               </div>
               <h1 className="text-xl font-bold text-teal-600 tracking-wide font-playfair ml-2">
@@ -137,13 +160,13 @@ const Navbar = () => {
 
           <div className="flex flex-col gap-4">
             <button
-              onClick={login}
+              onClick={() => navigate('/login')}
               className="px-5 py-2.5 rounded border border-teal-600 text-teal-600 font-medium text-[0.95rem] tracking-wide transition-all duration-300 hover:bg-teal-50"
             >
               Sign In
             </button>
             <button
-              onClick={register}
+              onClick={() => navigate('/signup')}
               className="px-5 py-2.5 rounded bg-teal-600 border border-teal-600 text-white font-medium text-[0.95rem] tracking-wide transition-all duration-300 hover:bg-blue-700"
             >
               Register
